@@ -14,11 +14,11 @@ const Navbar = () => {
     return <h1>No context to consume</h1>;
   }
 
-  const { fetchRecipe } = state;
+  const { fetchData } = state;
   const isDisable = Boolean(!q);
 
   const handleSearch = () => {
-    fetchRecipe(q);
+    fetchData(q);
   };
 
   return (

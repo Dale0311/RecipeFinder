@@ -10,17 +10,26 @@ const Recipe = () => {
     return <h1>No context to consume</h1>;
   }
 
-  const { data, error, loading } = state;
+  const { data, error, loading, history } = state;
 
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
   if (error) return <h1>{error}</h1>;
+  console.log('_______________________________________');
+  console.log('Data');
+  console.log(data);
+  console.log('   ');
+  console.log('_______________________________________');
+  console.log('history');
+  console.log(history);
+  console.log('   ');
+  console.log('_______________________________________');
 
-  const recipeCards = data?.hits.map((recipe) => (
+  const recipeCards = data?.hits.map((recipe, i) => (
     <RecipeCard
-      key={recipe.label}
+      key={recipe.label + i}
       calories={recipe.calories}
       cuisineType={recipe.cuisineType}
       image={recipe.image}

@@ -8,22 +8,27 @@ const Pagination = () => {
     return <h1>No context to consume</h1>;
   }
 
-  const { data } = state;
+  const { onPageChange } = state;
   return (
     <div className="flex items-center space-x-4 mt-4 justify-center">
       {/* Previous Button */}
-      <a
+      <button
         className={`px-4 py-2 rounded border border-gray-300 `}
-        href={data?._links.next.href}
+        onClick={() => onPageChange('prev')}
       >
         Previous
-      </a>
+      </button>
 
       {/* Page Number Display */}
       <span className="text-gray-500 text-lg">Page 1 of 19</span>
 
       {/* Next Button */}
-      <a className={`px-4 py-2 rounded border border-gray-300`}>Next</a>
+      <button
+        className={`px-4 py-2 rounded border border-gray-300`}
+        onClick={() => onPageChange('next')}
+      >
+        Next
+      </button>
     </div>
   );
 };

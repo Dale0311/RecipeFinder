@@ -24,13 +24,9 @@ const useFetch = () => {
     history: [],
   });
 
-  const [q, setQ] = useState('Filipino');
-
   useEffect(() => {
-    fetchData(q);
-  }, [q]);
-
-  const fetchRecipe = (q: string) => setQ(q);
+    fetchData('Filipino');
+  }, []);
 
   const fetchData = async (q: string) => {
     setState((p) => ({ ...p, loading: true }));
@@ -44,7 +40,7 @@ const useFetch = () => {
       const totalPage = res.data.count / 20;
       const currentPage = res.data.to / 20;
       const nextURL = res.data._links.next.href;
-      const currentURL = res.request.responseURL;
+      const currentURL: string = res.request.responseURL;
       const prevURL = '';
 
       setState((p) => ({
@@ -59,29 +55,46 @@ const useFetch = () => {
     }
   };
 
-  // const onPageChange = async (action: 'next' | 'prev') => {
-  //   setState((p) => ({ ...p, loading: true }));
-  //   try {
-  //     const res = await axios.get<TModifiedResponse>(q);
-  //     const totalPage = res.data.count / 20;
-  //     const currentPage = res.data.to / 20;
-  //     const nextURL = res.data._links.next.href;
-  //     const currentURL = '';
-  //     const prevURL = state.pagination.nextURL;
+  // created logic for backtracking
+  const onPageChange = async (action: 'next' | 'prev') => {
+    setState((p) => ({ ...p, loading: true }));
+    const currentHistoryIndex = state.history.length - 1;
+    const tempHistory = state.history;
 
-  //     setState((p) => ({
-  //       ...p,
-  //       data: res.data,
-  //       pagination: { totalPage, currentPage, prevURL, nextURL },
-  //     }));
-  //   } catch (error) {
-  //     setState((p) => ({ ...p, error: 'Something went wrong' }));
-  //   } finally {
-  //     setState((p) => ({ ...p, loading: false }));
-  //   }
-  // };
+    const nextPageClick = Boolean(action === 'next');
 
-  return { ...state, fetchRecipe };
+    const currentPagination = state.history[currentHistoryIndex];
+
+    //que
+    const q = nextPageClick
+      ? currentPagination.nextURL
+      : currentPagination.prevURL;
+
+    try {
+      const res = await axios.get<TModifiedResponse>(q);
+
+      const newPage = {
+        totalPage: res.data.count / 20,
+        currentPage: res.data.to / 20,
+        nextURL: res.data._links.next.href,
+        currentURL: currentPagination.nextURL, //nextURL would be stored in currentURL on next render
+        prevURL: currentPagination.currentURL, //currentURL would be store in previousURL when user click next
+      };
+
+      nextPageClick ? tempHistory.push(newPage) : tempHistory.pop();
+      setState((p) => ({
+        ...p,
+        data: res.data,
+        history: tempHistory,
+      }));
+    } catch (error) {
+      setState((p) => ({ ...p, error: 'Something went wrong' }));
+    } finally {
+      setState((p) => ({ ...p, loading: false }));
+    }
+  };
+
+  return { ...state, fetchData, onPageChange };
 };
 
 export default useFetch;
