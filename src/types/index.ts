@@ -13,6 +13,8 @@ export type TModifiedResponse = {
       title: string;
     };
   };
+  to: number;
+  count: number;
 };
 
 export type TApiResponse = {
@@ -33,5 +35,7 @@ export type TApiResponse = {
       title: string;
     };
   };
+  to: number;
+  count: number;
   [key: string]: any;
 };

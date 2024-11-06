@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { TModifiedResponse, TRecipe } from '../types';
+import { TModifiedResponse } from '../types';
 
 type TContext = {
   data: TModifiedResponse | undefined;

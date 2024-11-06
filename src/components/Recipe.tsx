@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import RecipeCard from './RecipeCard';
 import { RecipeContext } from '../context';
+import Pagination from './Pagination';
 
 const Recipe = () => {
   const state = useContext(RecipeContext);
@@ -27,7 +28,12 @@ const Recipe = () => {
     />
   ));
 
-  return <div className="grid grid-cols-4 gap-4 max-w-full">{recipeCards}</div>;
+  return (
+    <div>
+      <div className="grid grid-cols-4 gap-4 max-w-full">{recipeCards}</div>
+      <Pagination />
+    </div>
+  );
 };
 
 export default Recipe;

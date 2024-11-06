@@ -17,7 +17,7 @@ const transformData = (data: TApiResponse): TModifiedResponse => {
     cuisineType: hit.recipe.cuisineType,
     calories: hit.recipe.calories,
   }));
-  return { hits, _links: data._links };
+  return { hits, _links: data._links, count: data.count, to: data.to };
 };
 
 instance.interceptors.response.use(
