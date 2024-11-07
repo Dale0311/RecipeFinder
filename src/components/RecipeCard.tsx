@@ -14,7 +14,12 @@ const RecipeCard = ({
   return (
     <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       {/* Image */}
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-48 object-cover"
+        loading="lazy"
+      />
 
       {/* Content */}
       <div className="p-4">

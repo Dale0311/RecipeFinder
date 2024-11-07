@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TModifiedResponse } from '../types';
 import instance from '../api/config';
-import axios from 'axios';
 
 type TState = {
   data: TModifiedResponse | undefined;
@@ -71,11 +70,11 @@ const useFetch = () => {
       : currentPagination.prevURL;
 
     try {
-      const res = await axios.get<TModifiedResponse>(q);
+      const res = await instance.get<TModifiedResponse>(q);
 
       const newPage = {
-        totalPage: res.data.count / 20,
-        currentPage: res.data.to / 20,
+        totalPage: Math.ceil(res.data.count / 20),
+        currentPage: Math.ceil(res.data.to / 20),
         nextURL: res.data._links.next.href,
         currentURL: currentPagination.nextURL, //nextURL would be stored in currentURL on next render
         prevURL: currentPagination.currentURL, //currentURL would be store in previousURL when user click next
