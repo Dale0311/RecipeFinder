@@ -1,20 +1,23 @@
 const CardSkeleton = () => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 animate-pulse bg-white">
-      {/* Image Placeholder */}
-      <div className="h-40 bg-gray-300 rounded mb-4"></div>
+    <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+      {/* Image */}
+      <div className="w-full h-48 bg-gray-200"></div>
 
-      {/* Title Placeholder */}
-      <div className="h-6 bg-gray-300 rounded mb-2 w-3/4"></div>
+      {/* Content */}
+      <div className="p-4">
+        {/* Title */}
+        <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
 
-      {/* Subtitle Placeholder (for category and calories) */}
-      <div className="flex justify-between items-center mb-4">
-        <div className="h-4 bg-gray-300 rounded w-1/3"></div>
-        <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+        {/* Cuisine and Calories */}
+        <div className="flex justify-between items-center mt-4 text-gray-500 text-sm">
+          <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+        </div>
+
+        {/* Button */}
+        <div className="h-10 bg-gray-200 rounded w-full mt-4"></div>
       </div>
-
-      {/* Button Placeholder */}
-      <div className="h-10 bg-gray-300 rounded w-full"></div>
     </div>
   );
 };

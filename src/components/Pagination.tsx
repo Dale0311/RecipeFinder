@@ -23,7 +23,10 @@ const Pagination = () => {
       <button
         className={`px-4 py-2 rounded border border-gray-300 disabled:cursor-not-allowed `}
         disabled={currentHistory.currentPage === 1 || history.length === 1}
-        onClick={() => onPageChange('prev')}
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          onPageChange('prev');
+        }}
       >
         Previous
       </button>
@@ -37,7 +40,9 @@ const Pagination = () => {
       {/* Next Button */}
       <button
         className={`px-4 py-2 rounded border border-gray-300 disabled:cursor-not-allowed`}
-        onClick={() => onPageChange('next')}
+        onClick={() => {
+          onPageChange('next');
+        }}
         disabled={currentHistory.currentPage === currentHistory.totalPage}
       >
         Next

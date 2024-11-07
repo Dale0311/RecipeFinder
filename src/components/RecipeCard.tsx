@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 type RecipeCardProps = {
   image: string;
   title: string;
@@ -11,14 +13,17 @@ const RecipeCard = ({
   cuisineType,
   calories,
 }: RecipeCardProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   return (
     <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       {/* Image */}
       <img
         src={image}
-        alt={title}
-        className="w-full h-48 object-cover"
+        className={`w-full h-48 object-cover ${
+          isLoaded ? 'block' : 'animate-pulse bg-gray-100'
+        }`}
         loading="lazy"
+        onLoad={() => setIsLoaded(true)}
       />
 
       {/* Content */}
