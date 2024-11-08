@@ -34,6 +34,10 @@ const useFetch = () => {
         params: {
           q,
         },
+        // const res = await instance.get<TModifiedResponse>('', {
+        //   params: {
+        //     q,
+        //   },
       });
 
       const totalPage = res.data.count / 20;
